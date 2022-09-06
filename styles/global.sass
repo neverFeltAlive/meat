@@ -2,7 +2,6 @@
 @import "constants"
 
 body
-  min-height: 100vh
   width: 100vw
   padding: 0
   margin: 0
@@ -14,33 +13,14 @@ h1, h2, h3, h4, h5, h6
 *
   box-sizing: border-box
 
-.background
-  @include background
-  position: absolute
-  top: 0
-  left: 0
-  z-index: -1
-
-  .background__overlay
-    @include background__dotted
-    height: $background-height
-
 main
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
+  @include background
+  height: 100%
   z-index: $main-z-index
-  pointer-events: all
 
-.container
-  width: 80%
-  margin: auto
-  height: $container-height
-  display: flex
-  flex-direction: column
-  justify-content: space-between
-  padding: 100px 20px
+.index
+  height: 100%
+  @include background__dotted
 
 .css-1diafny-MuiSlider-root
  color: $accent-color

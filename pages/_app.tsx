@@ -2,19 +2,17 @@ import '../styles/global.sass'
 import type {AppProps} from 'next/app'
 import Header from "../components/header/Header";
 import React from "react";
-import {motion} from "framer-motion";
+import {Provider} from "react-redux";
+import {store} from "../app/store";
 
 function MyApp({Component, pageProps}: AppProps) {
     return (
-        <>
-            <div className="background">
-                <div className="background__overlay"/>
-            </div>
+        <Provider store={store}>
             <Header/>
             <main>
                 <Component {...pageProps} />
             </main>
-        </>
+        </Provider>
     )
 }
 

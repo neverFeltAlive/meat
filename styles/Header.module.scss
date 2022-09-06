@@ -28,7 +28,6 @@
     z-index: $overlay-z-index;
     top: 0;
     left: 0;
-    padding-top: $header-height;
     width: 30%
   }
 
@@ -56,9 +55,5 @@
       opacity: 0.3;
     }
   }
-}
-
-:export {
-  headerHeight: $header-height;
 }
 

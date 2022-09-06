@@ -14,15 +14,10 @@ const Home: NextPage = () => {
     return (
         <>
             <div className="index">
-                <div className="container">
-                    {sections.map((section, index) => {
-                        return (
-                            <div key={index} className="section">
-                                {section}
-                            </div>
-                        )
-                    })}
-                </div>
+                <Schema/>
+                {sections.map((section, index) => {
+                    return section
+                })}
             </div>
         </>
     );

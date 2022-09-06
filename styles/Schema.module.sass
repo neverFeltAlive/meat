@@ -1,5 +1,30 @@
-.schema
-  height: 80vh
-  background-color: rgba(0, 255, 0, 0.2)
-  backdrop-filter: blur(3px)
+@import "constants"
 
+.schema__container
+  background-image: url("/images/meat.jpg")
+  background-size: cover
+
+.schema
+  background-color: $main-color-transparent
+  display: flex
+  justify-content: flex-end
+
+  .schema__text
+    width: 50%
+    margin: 250px
+    text-align: right
+
+    h1
+      font-size: 55px
+      font-weight: 900
+      color: $accent-color
+
+    h3
+      font-size: 30px
+      font-weight: 400
+      color: $light-color
+
+.schema__line
+  background-color: $accent-color-transparent
+  height: 20px
+  backdrop-filter: blur(3px)

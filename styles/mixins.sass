@@ -1,26 +1,20 @@
 @import "constants"
 
 @mixin background
-  height: $background-height
   width: 100vw
   background-image: url("/images/background.jpg")
   background-repeat: repeat
   background-position: center
   background-attachment: fixed
 
-
 @mixin background__dotted
-  background-image: radial-gradient(rgba(0, 0, 0, 0) 1px, $middle-color 1px)
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 1px, $light-color 1px)
   background-size: 6px 6px
   backdrop-filter: blur(3px)
 
-@mixin wrapper
-  display: flex
-  width: 100%
-  justify-content: center
-
 @mixin container
-  flex: 0.6
+  width: 60%
+  margin: 150px auto
 
 @mixin input
   display: flex
@@ -65,3 +59,9 @@
   color: $accent-color
   font-size: 20px
   margin-bottom: 40px
+
+@mixin notes
+  margin: 0
+  color: $accent-color
+  font-weight: 400
+  font-size: 14px

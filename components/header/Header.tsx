@@ -66,25 +66,6 @@ const Header: FC = () => {
             custom={height}
             ref={containerRef}
         >
-            <motion.div className={styles.header__background} variants={variantsBackground}/>
-            {isOpen && (
-                    <motion.ul
-                        className={styles.header__menu}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0}}
-                        variants={variantsMenu}
-                    >
-                        <AnimatePresence>
-                            {itemsMenu.map((item, index) => (
-                                <MenuItem colorIndex={index} key={index} text={item.text} icon={item.icon}/>
-                            ))}
-                        </AnimatePresence>
-                    </motion.ul>
-            )}
-            <div className={styles.header__button}>
-                <MenuToggle toggle={() => toggleOpen()}/>
-            </div>
             <div className={styles.header__progress}>
                 <svg id="progress" width="80" height="80" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="20" pathLength="1" className={styles.header__progressBackground} />
@@ -103,3 +84,27 @@ const Header: FC = () => {
 };
 
 export default Header;
+
+
+// Old Version
+//
+// <motion.div className={styles.header__background} variants={variantsBackground}/>
+// {isOpen && (
+//     <motion.ul
+//         className={styles.header__menu}
+//         initial={{ opacity: 0 }}
+//         animate={{ opacity: 1 }}
+//         exit={{ opacity: 0}}
+//         variants={variantsMenu}
+//     >
+//         <AnimatePresence>
+//             {itemsMenu.map((item, index) => (
+//                 <MenuItem colorIndex={index} key={index} text={item.text} icon={item.icon}/>
+//             ))}
+//         </AnimatePresence>
+//     </motion.ul>
+// )}
+// <div className={styles.header__button}>
+//     <MenuToggle toggle={() => toggleOpen()}/>
+// </div>
+//
