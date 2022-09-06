@@ -1,0 +1,22 @@
+@import "constants"
+
+.slider
+  display: flex
+  justify-content: space-between
+
+  .slider__button
+    display: flex
+    align-items: center
+    justify-content: center
+    outline: none
+    background: none
+    border: none
+    border-radius: 10px
+    margin: 0 20px
+
+    &:hover
+      background-color: $light-color
+      color: $accent-color
+
+  .slider__container
+    width: 150px

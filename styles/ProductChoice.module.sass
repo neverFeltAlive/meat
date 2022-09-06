@@ -1,0 +1,111 @@
+@import "constants"
+@import "mixins"
+
+.productChoice
+  text-align: center
+  position: relative
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: 100%
+  padding: 20px 0
+  font-weight: 600
+  font-size: 16px
+
+.productChoice__name
+  text-align: left
+  padding: 0 20px
+  font-size: 20px
+  font-weight: 600
+
+.productChoice__note
+  font-size: 14px
+  text-align: right
+  padding: 20px
+  color: $accent-color
+  position: absolute
+  bottom: 0
+
+
+.productChoice__header
+  position: absolute
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 20px 20px
+  top: 0
+  width: 100%
+  border-radius: 10px
+
+  h3
+    font-size: 25px
+    border-bottom: 2px solid $accent-color
+
+  .productChoice__basket
+    display: flex
+
+.productChoice__product
+  display: flex
+  justify-content: center
+  align-items: center
+  border: 2px solid $main-color
+  background-color: $white-color
+  font-size: 35px
+  border-radius: 50%
+  width: 50px
+  height: 50px
+  padding: 5px
+  margin: 0
+
+  &:hover
+    color: $accent-color
+    border-color: $accent-color
+    z-index: 4
+    margin: 0 20px
+    scale: 1.2
+
+
+.productChoice__choiceContainer
+  @include choiceContainer
+
+.productChoice__choice
+  p
+    margin: 0 0 5px 0
+
+.productChoice__price
+  font-size: 16px
+  font-weight: 400
+
+.productChoice__measures
+  font-weight: 600
+  font-size: 14px
+  color: $accent-color
+
+.productChoice__button
+  @include button
+
+.productChoice__sliderContainer
+  width: 50%
+  margin: 20px auto
+
+.productChoice__slider
+  display: flex
+  justify-content: space-between
+
+.productChoice__sliderInput
+  flex: 0.2
+  margin-left: 20px
+  width: 40px
+  background: none
+  height: 40px
+  border-bottom: 2px solid $main-color
+  border-top: none
+  border-left: none
+  border-right: none
+  border-radius: 5px
+  text-align: center
+  font-size: 16px
+
+  &:focus
+    border-color: $accent-color
+    outline: none

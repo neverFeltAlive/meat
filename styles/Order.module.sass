@@ -1,0 +1,73 @@
+@import "mixins"
+@import "constants"
+
+$height: 95vh
+
+@mixin box
+  flex: 0.5
+  border: 2px solid $light-accent-color
+  border-radius: 20px
+  box-shadow: -10px 10px 20px $light-accent-color
+  backdrop-filter: blur(3px)
+
+
+  &:hover
+    border-color: $accent-color
+
+.order__wrapper
+  @include wrapper
+
+.order
+  @include container
+  height: $height
+
+  h2
+    @include sectionTitle
+
+  h4
+    @include sectionSubTitle
+
+
+.order__container
+  display: flex
+  align-items: center
+  justify-content: center
+
+.order__header
+  @include box
+  display: flex
+
+  .order__button
+    font-size: 20px
+    display: flex
+    justify-content: center
+    align-items: center
+    margin-left: 20px
+    padding: 5px
+    border-radius: 50%
+    width: 60px
+    height: 60px
+    background: none
+    cursor: pointer
+
+    &:hover
+      color: $accent-color
+      border-color: $accent-color
+
+.order__body
+  @include box
+  margin-top: 20px
+
+
+.order__right
+  @include box
+  background-color: rgba(0,0,0,0.2)
+  height: $height - 10
+
+.order__left
+  @include box
+  height: ($height - 10) / 1.2
+  background-color: rgba(255, 255, 255, 0.2)
+  border-top-right-radius: 0
+  border-bottom-right-radius: 0
+  border-right: none

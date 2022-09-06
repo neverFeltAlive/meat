@@ -1,0 +1,33 @@
+@import "mixins"
+@import "constants"
+
+.cart
+  display: flex
+  flex-direction: column
+  justify-content: center
+  height: 100%
+  width: 80%
+  margin: auto
+
+.cart__choiceContainer
+  @include choiceContainer
+
+.cart__button
+  @include button
+
+.cart__time
+  @include input
+
+  input
+    background: none
+    border: none
+    font-size: 16px
+    outline: none
+
+.cart__address
+  text-align: center
+  height: 100px
+
+  h3
+    margin-top: 15px
+    padding: 10px
