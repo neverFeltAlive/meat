@@ -1,80 +1,22 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import styles from "../../styles/Basket.module.sass";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {removeProduct, selectProducts} from "../../features/products/productsSlice";
-import Product from "./Product";
-
-
-const meatOptions = [
-    {
-        name: "Баранина",
-        parts: [
-            {
-                name: "На фарш",
-                price: 300,
-                mass: true,
-            },
-            {
-                name: "Вырезка",
-                price: 800,
-                mass: false,
-            },
-            {
-                name: "Нога",
-                price: 500,
-                mass: true,
-            }
-        ],
-    },
-    {
-        name: "Свинина",
-        parts: [
-            {
-                name: "На фарш",
-                price: 300,
-                mass: true,
-            },
-            {
-                name: "Вырезка",
-                price: 800,
-                mass: false,
-            },
-            {
-                name: "Нога",
-                price: 500,
-                mass: true,
-            }
-        ],
-    },
-    {
-        name: "Говядина",
-        parts: [
-            {
-                name: "На фарш",
-                price: 300,
-                mass: true,
-            },
-            {
-                name: "Вырезка",
-                price: 800,
-                mass: false,
-            },
-            {
-                name: "Нога",
-                price: 500,
-                mass: true,
-            }
-        ],
-    }
-]
+import {removeProduct, selectProducts} from "../../features/basket/basketSlice";
+import {selectCatalog} from "../../features/catalog/catalogSlice";
+import {FaTimes} from "react-icons/fa";
 
 const Basket: FC = () => {
     const products = useAppSelector(selectProducts);
+    const catalog = useAppSelector(selectCatalog);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+
+    }, [catalog])
 
     let cost = 0
     products.forEach((product) => {
-        cost += product.quantity * meatOptions[product.meatOption].parts[product.meatPart].price;
+        cost += catalog[product.category].items[product.item].price * product.quantity
     })
 
     return (
@@ -89,7 +31,13 @@ const Basket: FC = () => {
                 }
 
                 return (
-                    <Product key={index} {...product} remove={removeHandler}/>
+                    <div key={index} className={styles.basket__product}>
+                        <p>{catalog[product.category].name}</p>
+                        <p>{catalog[product.category].items[product.item].name}</p>
+                        <p>{product.quantity}</p>
+                        <p>{catalog[product.category].items[product.item].price * product.quantity}</p>
+                        <button onClick={removeHandler}><FaTimes/></button>
+                    </div>
                 )
             })}
             {products.length > 0 && (

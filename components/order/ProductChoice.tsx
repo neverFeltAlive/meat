@@ -1,90 +1,26 @@
 import React, {FC, useState} from 'react';
 import styles from "../../styles/ProductChoice.module.sass";
-import {FaShoppingBasket} from "react-icons/fa";
 import Select from "./Select";
-import {selectProducts, ProductPayload, addProduct} from "../../features/products/productsSlice";
+import {ProductPayload, addProduct} from "../../features/basket/basketSlice";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-
-//region Data
-const meatOptions = [
-    {
-        name: "Баранина",
-        parts: [
-            {
-                name: "На фарш",
-                price: 300,
-                mass: true,
-            },
-            {
-                name: "Вырезка",
-                price: 800,
-                mass: false,
-            },
-            {
-                name: "Нога",
-                price: 500,
-                mass: true,
-            }
-        ],
-    },
-    {
-        name: "Свинина",
-        parts: [
-            {
-                name: "На фарш",
-                price: 300,
-                mass: true,
-            },
-            {
-                name: "Вырезка",
-                price: 800,
-                mass: false,
-            },
-            {
-                name: "Нога",
-                price: 500,
-                mass: true,
-            }
-        ],
-    },
-    {
-        name: "Говядина",
-        parts: [
-            {
-                name: "На фарш",
-                price: 300,
-                mass: true,
-            },
-            {
-                name: "Вырезка",
-                price: 800,
-                mass: false,
-            },
-            {
-                name: "Нога",
-                price: 500,
-                mass: true,
-            }
-        ],
-    }
-]
-//endregion
+import {selectCatalog} from "../../features/catalog/catalogSlice";
 
 const defaultValues: ProductPayload = {
-    meatOption: 0,
-    meatPart: 0,
+    category: 0,
+    item: 0,
     quantity: 1
 }
 
 const ProductChoice: FC = () => {
     const [values, setValues] = useState<ProductPayload>(defaultValues);
     const dispatch = useAppDispatch();
+    const catalog = useAppSelector(selectCatalog);
 
-    const setNextIndex = (length: number, current: number, key: string = "meatOption") => {
+    const setNextIndex = (length: number, current: number, key: string = "category") => {
         const index = (current === length - 1) ? 0 : ++current;
         setValues({...values, [key]: index});
     }
-    const setPreviousIndex = (length: number, current: number, key: string = "meatOption") => {
+    const setPreviousIndex = (length: number, current: number, key: string = "category") => {
         const index = (current === 0) ? length - 1 : --current;
         setValues({...values, [key]: index});
     }
@@ -97,37 +33,38 @@ const ProductChoice: FC = () => {
         event.preventDefault();
         dispatch(addProduct(values));
     }
+    console.log(catalog);
 
-    const isMass = meatOptions[values.meatOption].parts[values.meatPart].mass;
+    const isMass = catalog[values.category].items[values.item] ? catalog[values.category].items[values.item].mass : true;
     return (
         <div className={styles.productChoice}>
-            {meatOptions.map((option, index) => {
-                if (values.meatOption === index) {
+            {catalog.map((category, index) => {
+                if (values.category === index) {
                     return (
                         <div key={index} className={styles.productChoice__choiceContainer}>
                             <Select setNext={() => {
-                                setNextIndex(meatOptions.length, values.meatOption)
+                                setNextIndex(catalog.length, values.category)
                             }} setPrevious={() => {
-                                setPreviousIndex(meatOptions.length, values.meatOption)
+                                setPreviousIndex(catalog.length, values.category)
                             }}>
-                                <p className={styles.productChoice__choice}>{option.name}</p>
+                                <p className={styles.productChoice__choice}>{category.name}</p>
                             </Select>
                         </div>
                     )
                 }
             })}
-            {meatOptions[values.meatOption].parts.map((part, index) => {
-                if (values.meatPart === index) {
+            {catalog[values.category].items.map((item, index) => {
+                if (values.item === index) {
                     return (
                         <div key={index} className={styles.productChoice__choiceContainer}>
                             <Select setNext={() => {
-                                setNextIndex(meatOptions[values.meatOption].parts.length, values.meatPart, "meatPart")
+                                setNextIndex(catalog[values.category].items.length, values.item, "item")
                             }} setPrevious={() => {
-                                setPreviousIndex(meatOptions[values.meatOption].parts.length, values.meatPart, "meatPart")
+                                setPreviousIndex(catalog[values.category].items.length, values.item, "item")
                             }}>
                                 <div className={styles.productChoice__choice}>
-                                    <p>{part.name}</p>
-                                    <p className={styles.productChoice__price}>{part.price} <span
+                                    <p>{item.name}</p>
+                                    <p className={styles.productChoice__price}>{item.price} <span
                                         className={styles.productChoice__measures}>&#8381;/ кг</span></p>
                                 </div>
                             </Select>
@@ -138,7 +75,7 @@ const ProductChoice: FC = () => {
             <div className={styles.productChoice__quantity}>
                 <p className={styles.productChoice__sliderName}>Количество <span
                     className={styles.productChoice__measures}>({(isMass) ? "кг" : "шт"})</span></p>
-                <input type="number" step={meatOptions[values.meatOption].parts[values.meatPart].mass ? 0.1 : 1} className={styles.productChoice__quantityInput} value={values.quantity}
+                <input type="number" step={isMass ? 0.1 : 1} className={styles.productChoice__quantityInput} value={values.quantity}
                        onChange={handleChange}/>
             </div>
             <button className={styles.productChoice__button} onClick={handleProductAdd}>Добавить продукт</button>

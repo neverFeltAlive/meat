@@ -3,3 +3,12 @@ export const CREDENTIALS = {
     NAME: "Название",
     ADDRESS: "г. Владимир, ул. Ленина, д. 5А"
 }
+
+export const CATALOG_COLLECTIONS = {
+    "Говядина": "catalog/categories/beef",
+    "Баранина": "catalog/categories/lamb",
+    "Свинина": "catalog/categories/pork",
+}
+
+export const DEBUG = true;
+

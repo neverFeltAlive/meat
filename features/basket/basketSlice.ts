@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
+import {DEBUG} from "../../constants";
 
 export interface ProductPayload{
-    meatOption: number,
-    meatPart: number,
+    category: number,
+    item: number,
     quantity: number
 }
 
@@ -11,16 +12,16 @@ interface Product extends ProductPayload{
     id: number,
 }
 
-interface ProductsState {
+interface BasketState {
     products: [] | Product[]
 }
 
-const initialState: ProductsState = {
+const initialState: BasketState = {
     products: []
 }
 
-export const productsSlice = createSlice({
-    name: 'products',
+export const basketSlice = createSlice({
+    name: 'basket',
     initialState,
 
     reducers: {
@@ -32,7 +33,7 @@ export const productsSlice = createSlice({
                     id = state.products[state.products.length - 1].id + 1;
             }
             catch (e) {
-                console.log(e);
+                if (DEBUG) console.log(e);
             }
 
             const product: Product = { ...action.payload, id};
@@ -44,6 +45,6 @@ export const productsSlice = createSlice({
     }
 })
 
-export const { addProduct, removeProduct } = productsSlice.actions
-export const selectProducts = (state: RootState) => state.products.products;
-export default productsSlice.reducer
+export const { addProduct, removeProduct } = basketSlice.actions
+export const selectProducts = (state: RootState) => state.basket.products;
+export default basketSlice.reducer
